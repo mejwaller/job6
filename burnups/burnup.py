@@ -19,13 +19,13 @@ print(date)
 
 p = ServerProxy("https://"+uname + ":" + pwd +"@trac.psenterprise.com/login/rpc")
 
-print("Milestone 7.1.0...")
+print("Milestone 2021.1.0...")
 #milestone 7.1.0
-new = str(len(p.ticket.query("milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("milestone=7.1.0&max=0")))
+new = str(len(p.ticket.query("milestone=2021.1.0&status=new&max=0")))
+assigned = str(len(p.ticket.query("milestone=2021.1.0&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("milestone=2021.1.0&status=reopened&max=0")))
+closed = str(len(p.ticket.query("milestone=2021.1.0&status=closed&max=0")))
+total = str(len(p.ticket.query("milestone=2021.1.0&max=0")))
 
 f = open('710.csv','a')
 
@@ -33,13 +33,43 @@ f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," 
 
 f.close()
 
+print("Milestone 2021.2.0 (8.0)...")
+#milestone 2021.2.0
+new = str(len(p.ticket.query("milestone=2021.2.0&status=new&max=0")))
+assigned = str(len(p.ticket.query("milestone=2021.2.0&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("milestone=2021.2.0&status=reopened&max=0")))
+closed = str(len(p.ticket.query("milestone=2021.2.0&status=closed&max=0")))
+total = str(len(p.ticket.query("milestone=2021.2.0&max=0")))
+
+f = open('80.csv','a')
+
+f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
+
+f.close()
+
+print("Milestone 2021.2.0 (IME)...")
+#milestone 2021.2.0 IME
+new = str(len(p.ticket.query("component=Dev_IME|Dev_EDM&milestone=2021.2.0&status=new&max=0")))
+assigned = str(len(p.ticket.query("component=Dev_IME|Dev_EDM&milestone=2021.2.0&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("component=Dev_IME|Dev_EDM&milestone=2021.2.0&status=reopened&max=0")))
+closed = str(len(p.ticket.query("component=Dev_IME|Dev_EDM&milestone=2021.2.0&status=closed&max=0")))
+total = str(len(p.ticket.query("component=Dev_IME|Dev_EDM&milestone=2021.2.0&max=0")))
+
+f = open('IME21_2.csv','a')
+
+f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
+
+f.close()
+
+
+
 print("gProperties...")
 #gProperties
-new = str(len(p.ticket.query("milestone=7.1.0&status=new&max=0&component=gProperties")))
-assigned = str(len(p.ticket.query("milestone=7.1.0&status=assigned&max=0&component=gProperties")))
-reopened = str(len(p.ticket.query("milestone=7.1.0&status=reopened&max=0&component=gProperties")))
-closed = str(len(p.ticket.query("milestone=7.1.0&status=closed&max=0&component=gProperties")))
-total = str(len(p.ticket.query("milestone=7.1.0&max=0&component=gProperties")))
+new = str(len(p.ticket.query("milestone=~gProp&status=new&max=0&component=gProperties")))
+assigned = str(len(p.ticket.query("milestone=~gProp0&status=assigned&max=0&component=gProperties")))
+reopened = str(len(p.ticket.query("milestone=~gProp&status=reopened&max=0&component=gProperties")))
+closed = str(len(p.ticket.query("milestone=~gProp&status=closed&max=0&component=gProperties")))
+total = str(len(p.ticket.query("milestone=~gProp&max=0&component=gProperties")))
 
 f=open("gprop.csv",'a')
 
@@ -47,41 +77,13 @@ f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," 
 
 f.close()
 
-print("gsa...")
-#gsa
-new = str(len(p.ticket.query("keywords=~gsa&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("keywords=~gsa&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("keywords=~gsa&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("keywords=~gsa&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("keywords=~gsa&milestone=7.1.0&max=0")))
-
-f = open('gsa.csv','a')
-
-f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
-
-f.close()
-
-print("Surrogate modelling...")
-#surrogate modelling
-new = str(len(p.ticket.query("keywords=~surrogate_modelling&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("keywords=~surrogate_modelling&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("keywords=~surrogate_modelling&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("keywords=~surrogate_modelling&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("keywords=~surrogate_modelling&milestone=7.1.0&max=0")))
-
-f = open('surrogatemodelling.csv','a')
-
-f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
-
-f.close()
-
 print("EDM...")
 #EDM
-new = str(len(p.ticket.query("milestone=7.1.0&status=new&max=0&component=Dev_EDM")))
-assigned = str(len(p.ticket.query("milestone=7.1.0&status=assigned&max=0&component=Dev_EDM")))
-reopened = str(len(p.ticket.query("milestone=7.1.0&status=reopened&max=0&component=Dev_EDM")))
-closed = str(len(p.ticket.query("milestone=7.1.0&status=closed&max=0&component=Dev_EDM")))
-total = str(len(p.ticket.query("milestone=7.1.0&component=Dev_EDM&max=0")))
+new = str(len(p.ticket.query("status=new&max=0&component=Dev_EDM")))
+assigned = str(len(p.ticket.query("status=assigned&max=0&component=Dev_EDM")))
+reopened = str(len(p.ticket.query("status=reopened&max=0&component=Dev_EDM")))
+closed = str(len(p.ticket.query("status=closed&max=0&component=Dev_EDM")))
+total = str(len(p.ticket.query("component=Dev_EDM&max=0")))
 
 f = open('edm.csv','a')
 
@@ -91,11 +93,11 @@ f.close()
 
 print("BPE...")
 #BPE
-new = str(len(p.ticket.query("keywords=~bayesian&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("keywords=~bayesian&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("keywords=~bayesian&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("keywords=~bayesian&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("keywords=~bayesian&milestone=7.1.0&max=0")))
+new = str(len(p.ticket.query("keywords=~bayesian&milestone=2021.2.0&status=new&max=0")))
+assigned = str(len(p.ticket.query("keywords=~bayesian&milestone=2021.2.0&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("keywords=~bayesian&milestone=2021.2.0&status=reopened&max=0")))
+closed = str(len(p.ticket.query("keywords=~bayesian&milestone=2021.2.0&status=closed&max=0")))
+total = str(len(p.ticket.query("keywords=~bayesian&milestone=2021.2.0&max=0")))
 
 f = open('bpe.csv','a')
 
@@ -103,57 +105,13 @@ f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," 
 
 f.close()
 
-print("UoM...")
-#UoM
-new = str(len(p.ticket.query("milestone=7.1.0&status=new&max=0&summary=~[UoM")))
-assigned = str(len(p.ticket.query("milestone=7.1.0&status=assigned&max=0&summary=~[UoM")))
-reopened = str(len(p.ticket.query("milestone=7.1.0&status=reopened&max=0&summary=~[UoM")))
-closed = str(len(p.ticket.query("milestone=7.1.0&status=closed&max=0&summary=~[UoM")))
-total = str(len(p.ticket.query("milestone=7.1.0&max=0&summary=~[UoM")))
-
-f = open('uom.csv','a')
-
-f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
-
-f.close()
-
-
-print("Process scheduling...")
-#process scheduling
-new = str(len(p.ticket.query("milestone=7.1.0&status=new&max=0&keywords=~sbpa_process_scheduling")))
-assigned = str(len(p.ticket.query("milestone=7.1.0&status=assigned&max=0&keywords=~sbpa_process_scheduling")))
-reopened = str(len(p.ticket.query("milestone=7.1.0&status=reopened&max=0&keywords=~sbpa_process_scheduling")))
-closed = str(len(p.ticket.query("milestone=7.1.0&status=closed&max=0&keywords=~sbpa_process_scheduling")))
-total = str(len(p.ticket.query("milestone=7.1.0&max=0&keywords=~sbpa_process_scheduling")))
-
-f = open('procsched.csv','a')
-
-f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
-
-f.close()
-
-
-print("Trajectories...")
-#trajectories
-new = str(len(p.ticket.query("keywords=~sbpa_trajectories&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("keywords=~sbpa_trajectories&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("keywords=~sbpa_trajectories&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("keywords=~sbpa_trajectories&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("keywords=~sbpa_trajectories&milestone=7.1.0&max=0")))
-
-f = open('trajectories.csv','a')
-
-f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
-
-f.close()
-
 print("State estimation...")
 #state estimation
-new = str(len(p.ticket.query("keywords=~state_estimation&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("keywords=~state_estimation&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("keywords=~state_estimation&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("keywords=~state_estimation&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("keywords=~state_estimation&milestone=7.1.0&max=0")))
+new = str(len(p.ticket.query("keywords=~state_estimation&milestone=2021.2.0&status=new&max=0")))
+assigned = str(len(p.ticket.query("keywords=~state_estimation&milestone=2021.2.0&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("keywords=~state_estimation&milestone=2021.2.0&status=reopened&max=0")))
+closed = str(len(p.ticket.query("keywords=~state_estimation&milestone=2021.2.0&status=closed&max=0")))
+total = str(len(p.ticket.query("keywords=~state_estimation&milestone=2021.2.0&max=0")))
 
 f = open('stateest.csv','a')
 
@@ -177,11 +135,11 @@ f.close()
 
 print("Live DoF...")
 #Live DoF
-new = str(len(p.ticket.query("summary~=[Live&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("summary~=[Live&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("summary~=[Live&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("summary~=[Live&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("summary~=[Live&milestone=7.1.0&max=0")))
+new = str(len(p.ticket.query("summary~=[Live|[LPR&status=new&max=0")))
+assigned = str(len(p.ticket.query("summary~=[Live|[LPR&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("summary~=[Live|[LPR&status=reopened&max=0")))
+closed = str(len(p.ticket.query("summary~=[Live|[LPR&status=closed&max=0")))
+total = str(len(p.ticket.query("summary~=[Live|[LPR&max=0")))
 
 f = open('livedof.csv','a')
 
@@ -189,41 +147,27 @@ f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," 
 
 f.close()
 
-print("Model versioning...")
-#model versioning
-new = str(len(p.ticket.query("keywords=~model_versioning&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("keywords=~model_versioning&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("keywords=~model_versioning&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("keywords=~model_versioning&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("keywords=~model_versioning&milestone=7.1.0&max=0")))
+print("New results manager...")
+new = str(len(p.ticket.query("keywords=~nrm&status=new&max=0")))
+assigned = str(len(p.ticket.query("keywords=~nrm&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("keywords=~nrm&status=reopened&max=0")))
+closed = str(len(p.ticket.query("keywords=~nrm&status=closed&max=0")))
+total = str(len(p.ticket.query("keywords=~nrm0&max=0")))
 
-f = open('modelv.csv','a')
-
-f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
-
-f.close()
-
-print("Model spec dialogs...")
-#model spec dialogs
-new = str(len(p.ticket.query("keywords=~sbpa_usability&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("keywords=~sbpa_usability&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("keywords=~sbpa_usability&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("keywords=~sbpa_usability&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("keywords=~sbpa_usability&milestone=7.1.0&max=0")))
-
-f = open('modspec.csv','a')
+f = open('nrm.csv','a')
 
 f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
 
 f.close()
+
 
 print("SbPA...")
 #sbpa
-new = str(len(p.ticket.query("keywords=~sbpa&milestone=7.1.0&status=new&max=0")))
-assigned = str(len(p.ticket.query("keywords=~sbpa&milestone=7.1.0&status=assigned&max=0")))
-reopened = str(len(p.ticket.query("keywords=~sbpa&milestone=7.1.0&status=reopened&max=0")))
-closed = str(len(p.ticket.query("keywords=~sbpa&milestone=7.1.0&status=closed&max=0")))
-total = str(len(p.ticket.query("keywords=~sbpa&milestone=7.1.0&max=0")))
+new = str(len(p.ticket.query("keywords=~sbpa&milestone=2021.1.0&status=new&max=0")))
+assigned = str(len(p.ticket.query("keywords=~sbpa&milestone=2021.1.0&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("keywords=~sbpa&milestone=2021.1.0&status=reopened&max=0")))
+closed = str(len(p.ticket.query("keywords=~sbpa&milestone=2021.1.0&status=closed&max=0")))
+total = str(len(p.ticket.query("keywords=~sbpa&milestone=2021.1.0&max=0")))
 
 f = open('sbpa.csv','a')
 
@@ -231,28 +175,60 @@ f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," 
 
 f.close()
 
+print("Team 1 gProperties")
+#team 1
+new = str(len(p.ticket.query("owner=agams|charlesp|samuelv&component=~gProperties&status=new&max=0")))
+assigned = str(len(p.ticket.query("owner=agams|charlesp|samuelv&component=~gProperties&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("owner=agams|charlesp|samuelv&component=~gProperties&status=reopened&max=0")))
+closed = str(len(p.ticket.query("owner=agams|charlesp|samuelv&component=~gProperties&status=closed&max=0")))
+total = str(len(p.ticket.query("owner=agams|charlesp|samuelv&component=~gProperties&max=0")))
 
+f = open('team1.csv','a')
 
+f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
 
+f.close()
 
+print("Team 3...")
+#team3
+new = str(len(p.ticket.query("milestone=2021.2.0&keywords=~state_estimation|solver:|surrogate_modelling|ddap_ds&component=Dev_IME&status=new&max=0")))
+assigned = str(len(p.ticket.query("milestone=2021.2.0&keywords=~state_estimation|solver:|surrogate_modelling|ddap_ds&component=Dev_IME&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("milestone=2021.2.0&keywords=~state_estimation|solver:|surrogate_modelling|ddap_ds&component=Dev_IME&status=reopened&max=0")))
+closed = str(len(p.ticket.query("milestone=2021.2.0&keywords=~state_estimation|solver:|surrogate_modelling|ddap_ds&component=Dev_IME&status=closed&max=0")))
+total = str(len(p.ticket.query("milestone=2021.2.0&keywords=~state_estimation|solver:|surrogate_modelling|ddap_ds&component=Dev_IME&max=0")))
 
+f = open('team3.csv','a')
 
+f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
 
+f.close()
 
+print("Team 5...")
+#Team 5
+new = str(len(p.ticket.query("milestone=~2021.2.&owner=duaneg|mariof|tristanz|luked&status=new&max=0")))
+assigned = str(len(p.ticket.query("milestone=~2021.2.&owner=duaneg|mariof|tristanz|luked&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("milestone=~12021.2.&owner=duaneg|mariof|tristanz|luked&status=reopened&max=0")))
+closed = str(len(p.ticket.query("milestone=~2021.2.&owner=duaneg|mariof|tristanz|luked&status=closed&max=0")))
+total = str(len(p.ticket.query("milestone=~2021.2.&owner=duaneg|mariof|tristanz|luked&max=0")))
 
+f = open('team5.csv','a')
 
+f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
 
+f.close()
 
+print("Arch...")
+#arch
+new = str(len(p.ticket.query("milestone=~2021.2.&keywords~=architecture&status=new&max=0")))
+assigned = str(len(p.ticket.query("milestone=~2021.2.&keywords~=architecture&status=assigned&max=0")))
+reopened = str(len(p.ticket.query("milestone=~12021.2.&keywords~=architecture&status=reopened&max=0")))
+closed = str(len(p.ticket.query("milestone=~2021.2.&keywords~=architecture&status=closed&max=0")))
+total = str(len(p.ticket.query("milestone=~2021.2.&keywords~=architecture&max=0")))
 
+f = open('arch.csv','a')
 
+f.write(date + "," + new + "," + assigned + "," + reopened + "," + closed + "," + total + "\n")
 
-
-
-
-
-
-
-
-
+f.close()
 
 

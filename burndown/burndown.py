@@ -53,80 +53,105 @@ curdate = datetime.today().strftime("%Y-%m-%d")
 
 now = cleanDate(curdate)
 
-startdate = date.fromisoformat('2021-01-18')
-endate = date.fromisoformat('2021-03-31')
+#startdate = date.fromisoformat('2021-01-18')
+t2startdate = date.fromisoformat('2021-03-08')
+#endate = date.fromisoformat('2021-03-31')
+startdate = date.fromisoformat('2021-06-03')
+endate = date.fromisoformat('2021-08-31')
 
 p = ServerProxy("https://"+uname + ":" + pwd +"@trac.psenterprise.com/login/rpc")
 #print(p.system.getAPIVersion())
 
-t4querystr="owner=josephw|laszlok|lukeu|nashwann|yuzhao|zhelyazo&status!=closed&milestone^=7.&max=0"
-t3querystr="owner=grzegorzr|ianw|jamesr|jingleiz|johnf&status!=closed&milestone^=7.&max=0"
-ldofquerystr="summary~=[Live&milestone=7.1.0&status!=closed&max=0"
+imequerystr="component=Dev_IME&milestone=2021.2.0&status!=closed&max=0"
+v212querystr="milestone=2021.2.0&status!=closed&max=0"
+t3querystr="keywords=~state_estimation|solver:|surrogate_modelling|ddap_ds&component=Dev_IME&status!=closed&milestone=2021.2.0&max=0"
+ldofquerystr="summary~=[Live|[LPR&status!=closed&max=0"
+edmquerystr="component=Dev_EDM&status!=closed&max=0"
+nrmquerystr="keywords=~nrm&status!=closed&max=0"
 
 p = ServerProxy("https://"+uname + ":" + pwd +"@trac.psenterprise.com/login/rpc")
 
-t4tickets=p.ticket.query(t4querystr)
+imetickets=p.ticket.query(imequerystr)
+v212tickets=p.ticket.query(v212querystr)
 t3tickets=p.ticket.query(t3querystr)
 ldoftickets=p.ticket.query(ldofquerystr)
+edmtickets=p.ticket.query(edmquerystr)
+nrmtickets=p.ticket.query(nrmquerystr)
 
 totrem=0
 ldoftotrem=0
 startpoints=70
 pointsrem=0
-starthrs=610
-ldofstarthrs=290
+starthrs=1007
+ldofstarthrs=47
+t3starthrs=13
 capacity=5
 numdevs=5
+imestart=77
+v212start=160
+edmstart=22
+nrmstart=2
 
-print(t4tickets)
-print(len(t4tickets))
+print(v212tickets)
+print(len(v212tickets))
 
+print("2021.2...")
+v212rem=len(v212tickets)
 
-print("Team 4...")
-for ticket in t4tickets:
-    print(ticket)
-    strhrs = p.ticket.get(ticket)[3].get("estimatedhours")
-    hrsleft = int (strhrs) if strhrs.isdigit() else 0
-    print(hrsleft)
-    totrem+=int(hrsleft)
+print(imetickets)
+print(len(imetickets))
 
-print(totrem)
+print("IME 2021.2...")
+imerem=len(imetickets)
+
 
 print(t3tickets)
 print(len(t3tickets))
 
 print("Team 3...")
-for ticket in t3tickets:
-    print(ticket)
-    strpts = p.ticket.get(ticket)[3].get("storypoints")
-    ptsleft = int (strpts) if strpts.isdigit() else 0
-    print(ptsleft)
-    pointsrem+=int(ptsleft)
+t3rem=len(t3tickets)
 
 print(ldoftickets)
 print(len(ldoftickets))
 
 print("Live DoF...")
-for ticket in ldoftickets:
-    print(ticket)
-    strhrs = p.ticket.get(ticket)[3].get("estimatedhours")
-    hrsleft = int (strhrs) if strhrs.isdigit() else 0
-    print(hrsleft)
-    ldoftotrem+=int(hrsleft)
+ldoftotrem = len(ldoftickets)
 
-idealrem = starthrs-(len(list(get_working_days(startdate,now)))*capacity*numdevs)
-ldofidealrem = ldofstarthrs-(len(list(get_working_days(startdate,now)))*capacity*numdevs)
+print(edmtickets)
+print(len(edmtickets))
 
+print("EDM...")
+edmrem=len(edmtickets)
 
-f = open('team4burndown.csv','a')
+print(nrmtickets)
+print(len(nrmtickets))
 
-f.write(str(startdate) + "," + str(curdate) + "," + str(endate) + "," + str(totrem) + "," + str(idealrem) + "\n")
+print("New results manager...")
+nrmrem=len(nrmtickets)
+
+daysrem = len(list(get_working_days(now,endate)))
+print("Days remaining:")
+print(daysrem)
+t3idealrem = t3starthrs-(t3starthrs/daysrem)
+ldofidealrem = ldofstarthrs-(ldofstarthrs/daysrem)
+v212idealrem = v212start-(v212start/daysrem)
+imeidealrem = imestart - (imestart/daysrem)
+edmidealrem = edmstart - (edmstart/daysrem)
+nrmidealrem = nrmstart - (nrmstart/daysrem)
+
+f = open("v212burndown.csv","a")
+
+f.write(str(startdate) + "," + str(curdate) + "," + str(endate) + "," + str(v212rem) + "," + str(v212idealrem) + "\n")
 
 f.close()
 
+f = open("imeburndown.csv","a")
+
+f.write(str(startdate) + "," + str(curdate) + "," + str(endate) + "," + str(imerem) + "," + str(imeidealrem) + "\n")
+
 f = open("team3burndown.csv","a")
 
-f.write(str(startdate) + "," + str(curdate) + "," + str(endate) + "," + str(startpoints) + "," + str(pointsrem) + "\n")
+f.write(str(startdate) + "," + str(curdate) + "," + str(endate) + "," + str(t3rem) + "," + str(t3idealrem) + "\n")
 
 f.close()
 
@@ -135,3 +160,15 @@ f = open("livedofburndown.csv","a")
 f.write(str(startdate) + "," + str(curdate) + "," + str(endate) + "," + str(ldoftotrem) + "," + str(ldofidealrem) + "\n")
 
 f.close()
+
+f = open("edmburndown.csv","a")
+
+f.write(str(startdate) + "," + str(curdate) + "," + str(endate) + "," + str(edmrem) + "," + str(edmidealrem) + "\n")
+
+f.close()
+
+f = open("nrmburndown.csv","a")
+
+f.write(str(startdate) + "," + str(curdate) + "," + str(endate) + "," + str(nrmrem) + "," + str(nrmidealrem) + "\n")
+
+
